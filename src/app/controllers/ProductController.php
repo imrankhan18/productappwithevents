@@ -37,11 +37,11 @@ class ProductController extends Controller{
                 $success=$val->save();
               
 
-        $this->view->success = $success;
+                $this->view->success = $success;
 
-        if($success){
-            $this->view->message = "Added succesfully";
-        }else{
+        if ($success) {
+                    $this->view->message = "Added succesfully";
+        } else {
             $this->view->message = "Not Add succesfully due to following reason: <br>".implode("<br>", $products->getMessages());
             $message = implode(" & ", $products->getMessages());
             $adapter = new Stream('../app/logs/login.log');
@@ -53,11 +53,5 @@ class ProductController extends Controller{
             );
                 $logger->error($message);
         }
-    
     }
-    // public function displayProductAction()
-    // {
-        
-        
-    // }
 }

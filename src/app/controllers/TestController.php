@@ -10,5 +10,11 @@ class TestController extends Controller
         $datehelper = new \App\Components\DateHelper();
         echo $datehelper->getCurrentDate();
     }   
+    public function EventTestAction()
+    {
+        $datehelper = new \App\Components\DateHelper();
+        echo $datehelper->getCurrentDate(); 
+        // die;
+    }
 
 }

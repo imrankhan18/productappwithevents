@@ -12,13 +12,15 @@ use Phalcon\Db\Adapter\Pdo\Mysql;
 use Phalcon\Config;
 use Phalcon\Di;
 use Phalcon\Escaper;
-use Phalcon\Session;
-// use Phalcon\Session\Adapter\Stream;
-use Phalcon\Http\Response\Cookies;
+// use Phalcon\Session;
+// use Phalcon\Http\Response\Cookies;
 use Phalcon\Logger;
 use Phalcon\Events\Manager;
 use Phalcon\Events\Manager as EventsManager;
 use Phalcon\Logger\Adapter\Stream;
+
+
+
 
 $config = new Config([]);
 
@@ -39,7 +41,8 @@ $loader->registerDirs(
 $loader->registerNamespaces(
     [
         
-        'App\Handle'=> APP_PATH . "/handle"
+        'App\Handle'=> APP_PATH . "/handle",
+        'App\Listener'=> APP_PATH . "/listener"
     ]
 );
 
@@ -65,17 +68,24 @@ $container->set(
         return $url;
     }
 );
+$application = new Application($container);
 
 $eventsManager = new EventsManager();
+
 $eventsManager->attach('Handle', new \App\Handle\Handle() );
+
+
+
+$eventsManager->attach(
+    'application:beforeHandleRequest',
+    new \App\Listener\NotificationListener()
+);
+$application->setEventsManager($eventsManager);
 $container->set(
     'EventsManager',
     $eventsManager
 );
-
-
-
-//$eventsManager->fire("event:default", new \App\Handle\Handle );
+// $eventsManager->fire("event:default", new \App\Handle\Handle );
 
 
 
@@ -149,7 +159,7 @@ $container->set(
 
 // 
 
-$application = new Application($container);
+
 
 
 

@@ -2,12 +2,12 @@
 
 namespace App\Components;
 use phalcon\Escaper;
-class MyEscaper
+class DateHelper
 {
-    // public function getCurrentDate()
-    // {
-    //     return date('y-m-d');
-    // }
+    public function getCurrentDate()
+    {
+        return date('y-m-d');
+    }
     // public function sanitize($input)
     // {
     //     $escaper=new Escaper();
@@ -18,4 +18,6 @@ class MyEscaper
     //     return $input;
 
     // }
+
+
 }

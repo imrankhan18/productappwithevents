@@ -21,8 +21,8 @@ class OrderController extends Controller
       //   $order->save();
         $values = Settings::find('id = 1');
         $eventsManager = $this->di->get('EventsManager');
-        $val = $eventsManager->fire('Handle:checkzip', $order, $values);
-        print_r($val);
+        $val = $eventsManager->fire('Handle:checkz', $order, $values);
+      //   print_r($val);
       //   die;
         $success = $val->save();
          // $values = Settings::find('id = 1');
